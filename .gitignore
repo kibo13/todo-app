@@ -1,0 +1,60 @@
+# Бинарные файлы
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.out
+
+# Сборочные директории
+/bin/
+/build/
+/dist/
+
+# Кэш модуля Go
+/vendor/
+
+# Кэш go build
+*.test
+*.prof
+*.cover
+
+# Кэширование, временные и системные файлы
+*.log
+*.tmp
+*.swp
+*.DS_Store
+Thumbs.db
+*.bak
+
+# IDE и редакторы
+.idea/
+.vscode/
+*.iml
+
+# Docker
+docker-compose.override.yml
+.env
+.env.*
+
+# Kubernetes
+*.yaml
+*.yml
+
+# Swagger / OpenAPI (если используется)
+swagger.json
+swagger.yaml
+
+# Node.js (если используются фронтенд-компоненты)
+node_modules
+
+# Logs
+*.json
+
+# Статические файлы (если есть, например для фронтенда)
+static/
+public/
+
+# Временные файлы тестирования
+coverage.out
+testdata/
