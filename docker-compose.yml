@@ -1,0 +1,22 @@
+services:
+  todo-app:
+    build: ./
+    command: ./todo-app
+    container_name: todo-app
+    environment:
+      - DB_PASSWORD=secret
+    ports:
+      - "8080:8080"
+    depends_on:
+      - todo-db
+
+  todo-db:
+    restart: always
+    image: postgres:latest
+    container_name: todo-db
+    volumes:
+      - ./database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5436:5432"
