@@ -1,4 +1,4 @@
-# Бинарные файлы
+# Binary files
 *.exe
 *.exe~
 *.dll
@@ -6,20 +6,20 @@
 *.dylib
 *.out
 
-# Сборочные директории
+# Build directories
 /bin/
 /build/
 /dist/
 
-# Кэш модуля Go
+# Go module cache
 /vendor/
 
-# Кэш go build
+# Go build cache
 *.test
 *.prof
 *.cover
 
-# Кэширование, временные и системные файлы
+# Caching, temporary, and system files
 *.log
 *.tmp
 *.swp
@@ -27,34 +27,36 @@
 Thumbs.db
 *.bak
 
-# IDE и редакторы
+# IDE and editors
 .idea/
 .vscode/
 *.iml
 
-# Docker
-docker-compose.override.yml
+# Ignore environment files
 .env
 .env.*
 
-# Kubernetes
+# Kubernetes configuration files
 *.yaml
 *.yml
 
-# Swagger / OpenAPI (если используется)
+# Swagger / OpenAPI files (if used)
 swagger.json
 swagger.yaml
 
-# Node.js (если используются фронтенд-компоненты)
-node_modules
+# Node.js dependencies (if frontend is used)
+node_modules/
 
 # Logs
 *.json
 
-# Статические файлы (если есть, например для фронтенда)
+# Static files (if any, e.g., frontend assets)
 static/
 public/
 
-# Временные файлы тестирования
+# Temporary test files
 coverage.out
 testdata/
+
+# Ignore Docker volumes
+/database/postgres/data/
