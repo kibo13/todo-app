@@ -1,7 +1,7 @@
 port: "8080"
 
 db:
-  host: "localhost"
+  host: "todo-db"
   port: "5432"
   username: "postgres"
   dbname: "postgres"
