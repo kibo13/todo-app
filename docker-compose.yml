@@ -1,7 +1,8 @@
 services:
   todo-app:
     build: ./
-    command: ["./wait-for-it.sh", "todo-db:5432", "--", "./todo-app"]
+    command:
+      ["./wait-for-it.sh", "todo-db:5432", "--timeout=30", "--", "./todo-app"]
     image: todo-app
     container_name: todo-app
     environment:
