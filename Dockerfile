@@ -6,6 +6,9 @@ RUN apk add --no-cache bash dos2unix
 RUN go version 
 ENV GOPATCH=/
 
+# Set the working directory
+WORKDIR /app
+
 # Copy all files into the container
 COPY ./ ./  
 
