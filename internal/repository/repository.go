@@ -6,23 +6,23 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user todo.User) (int, error)
-	GetUser(username, password string) (todo.User, error)
+	CreateUser(user entity.User) (int, error)
+	GetUser(username, password string) (entity.User, error)
 }
 
 type TodoList interface {
-	Create(userId int, list todo.TodoList) (int, error)
-	GetAll(userId int) ([]todo.TodoList, error)
-	GetById(userId, listId int) (todo.TodoList, error)
-	Update(userId, listId int, input todo.UpdateListInput) error
+	Create(userId int, list entity.TodoList) (int, error)
+	GetAll(userId int) ([]entity.TodoList, error)
+	GetById(userId, listId int) (entity.TodoList, error)
+	Update(userId, listId int, input entity.UpdateListInput) error
 	Delete(userId, listId int) error
 }
 
 type TodoItem interface {
-	Create(listId int, item todo.TodoItem) (int, error)
-	GetAll(userId, listId int) ([]todo.TodoItem, error)
-	GetById(userId, itemId int) (todo.TodoItem, error)
-	Update(userId, itemId int, input todo.UpdateItemInput) error
+	Create(listId int, item entity.TodoItem) (int, error)
+	GetAll(userId, listId int) ([]entity.TodoItem, error)
+	GetById(userId, itemId int) (entity.TodoItem, error)
+	Update(userId, itemId int, input entity.UpdateItemInput) error
 	Delete(userId, itemId int) error
 }
 
