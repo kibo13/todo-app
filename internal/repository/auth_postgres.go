@@ -2,9 +2,8 @@ package repository
 
 import (
 	"fmt"
-
 	"github.com/jmoiron/sqlx"
-	todo "github.com/kibo13/todo-app/internal/entity"
+	"github.com/kibo13/todo-app/internal/entity"
 )
 
 type AuthPostgres struct {
@@ -15,7 +14,7 @@ func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 	return &AuthPostgres{db: db}
 }
 
-func (r *AuthPostgres) CreateUser(user todo.User) (int, error) {
+func (r *AuthPostgres) CreateUser(user entity.User) (int, error) {
 	var id int
 	query := fmt.Sprintf("INSERT INTO %s (name, username, password_hash) values ($1, $2, $3) RETURNING id", usersTable)
 
@@ -26,8 +25,8 @@ func (r *AuthPostgres) CreateUser(user todo.User) (int, error) {
 	return id, nil
 }
 
-func (r *AuthPostgres) GetUser(username, password string) (todo.User, error) {
-	var user todo.User
+func (r *AuthPostgres) GetUser(username, password string) (entity.User, error) {
+	var user entity.User
 	query := fmt.Sprintf("SELECT id FROM %s WHERE username=$1 AND password_hash=$2", usersTable)
 	err := r.db.Get(&user, query, username, password)
 

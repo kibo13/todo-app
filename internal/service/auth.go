@@ -4,11 +4,10 @@ import (
 	"crypto/sha1"
 	"errors"
 	"fmt"
-	"time"
-
 	"github.com/dgrijalva/jwt-go"
-	todo "github.com/kibo13/todo-app/internal/entity"
+	"github.com/kibo13/todo-app/internal/entity"
 	"github.com/kibo13/todo-app/internal/repository"
+	"time"
 )
 
 const (
@@ -30,7 +29,7 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 	return &AuthService{repo: repo}
 }
 
-func (s *AuthService) CreateUser(user todo.User) (int, error) {
+func (s *AuthService) CreateUser(user entity.User) (int, error) {
 	user.Password = generatePasswordHash(user.Password)
 	return s.repo.CreateUser(user)
 }

@@ -1,11 +1,10 @@
 package handler
 
 import (
+	"github.com/gin-gonic/gin"
+	"github.com/kibo13/todo-app/internal/entity"
 	"net/http"
 	"strconv"
-
-	"github.com/gin-gonic/gin"
-	todo "github.com/kibo13/todo-app/internal/entity"
 )
 
 func (h *Handler) createList(c *gin.Context) {
@@ -14,7 +13,7 @@ func (h *Handler) createList(c *gin.Context) {
 		return
 	}
 
-	var input todo.TodoList
+	var input entity.TodoList
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
@@ -32,7 +31,7 @@ func (h *Handler) createList(c *gin.Context) {
 }
 
 type getAllListsResponse struct {
-	Data []todo.TodoList `json:"data"`
+	Data []entity.TodoList `json:"data"`
 }
 
 func (h *Handler) getAllList(c *gin.Context) {
@@ -85,7 +84,7 @@ func (h *Handler) updateList(c *gin.Context) {
 		return
 	}
 
-	var input todo.UpdateListInput
+	var input entity.UpdateListInput
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return

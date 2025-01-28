@@ -2,10 +2,9 @@ package repository
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/jmoiron/sqlx"
-	todo "github.com/kibo13/todo-app/internal/entity"
+	"github.com/kibo13/todo-app/internal/entity"
+	"strings"
 )
 
 type TodoItemPostgres struct {
@@ -16,7 +15,7 @@ func NewTodoItemPostgres(db *sqlx.DB) *TodoItemPostgres {
 	return &TodoItemPostgres{db: db}
 }
 
-func (r *TodoItemPostgres) Create(listId int, item todo.TodoItem) (int, error) {
+func (r *TodoItemPostgres) Create(listId int, item entity.TodoItem) (int, error) {
 	tx, err := r.db.Begin()
 	if err != nil {
 		return 0, err
@@ -42,8 +41,8 @@ func (r *TodoItemPostgres) Create(listId int, item todo.TodoItem) (int, error) {
 	return itemId, tx.Commit()
 }
 
-func (r *TodoItemPostgres) GetAll(userId, listId int) ([]todo.TodoItem, error) {
-	var items []todo.TodoItem
+func (r *TodoItemPostgres) GetAll(userId, listId int) ([]entity.TodoItem, error) {
+	var items []entity.TodoItem
 	query := fmt.Sprintf("SELECT ti.id, ti.title, ti.description, ti.done FROM %s ti INNER JOIN %s li on li.item_id = ti.id INNER JOIN %s ul on ul.list_id = li.list_id WHERE li.list_id = $1 AND ul.user_id = $2", todoItemsTable, listsItemsTable, usersListsTable)
 
 	if err := r.db.Select(&items, query, listId, userId); err != nil {
@@ -53,8 +52,8 @@ func (r *TodoItemPostgres) GetAll(userId, listId int) ([]todo.TodoItem, error) {
 	return items, nil
 }
 
-func (r *TodoItemPostgres) GetById(userId, itemId int) (todo.TodoItem, error) {
-	var item todo.TodoItem
+func (r *TodoItemPostgres) GetById(userId, itemId int) (entity.TodoItem, error) {
+	var item entity.TodoItem
 
 	query := fmt.Sprintf("SELECT ti.id, ti.title, ti.description, ti.done FROM %s ti INNER JOIN %s li on li.item_id = ti.id INNER JOIN %s ul on ul.list_id = li.list_id WHERE ti.id = $1 AND ul.user_id = $2", todoItemsTable, listsItemsTable, usersListsTable)
 
@@ -65,7 +64,7 @@ func (r *TodoItemPostgres) GetById(userId, itemId int) (todo.TodoItem, error) {
 	return item, nil
 }
 
-func (r *TodoItemPostgres) Update(userId, itemId int, input todo.UpdateItemInput) error {
+func (r *TodoItemPostgres) Update(userId, itemId int, input entity.UpdateItemInput) error {
 	setValues := make([]string, 0)
 	args := make([]interface{}, 0)
 	argId := 1
