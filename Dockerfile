@@ -3,6 +3,10 @@ FROM golang:1.23.4-alpine
 # Install bash and dos2unix
 RUN apk add --no-cache bash dos2unix  
 
+# Install swag for generating Swagger documentation (specific version)
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+
+# Print Go version for debugging (not necessary)
 RUN go version 
 ENV GOPATCH=/
 
@@ -20,6 +24,9 @@ RUN chmod +x wait-for-it.sh
 
 # Download Go modules
 RUN go mod download
+
+# Generate Swagger documentation
+RUN swag init -g ./cmd/app/main.go -o ./docs
 
 # Build the Go application
 RUN go build -o todo-app ./cmd/app/main.go 
